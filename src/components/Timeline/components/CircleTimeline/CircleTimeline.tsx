@@ -3,14 +3,13 @@ import styled from "styled-components";
 import TimelinePoint from "./TimelinePoint";
 import YearsDisplay from "./YearsDisplay";
 import {TimelinePeriod} from "../../types/types";
+import {useTimelineRotation} from "../../hooks/useTimelineRotation";
 
 interface CircleTimelineProps {
     periods: TimelinePeriod[];
     activePeriod: TimelinePeriod | null;
     activePeriodId: number;
     onPeriodChange: (periodId: number) => void;
-    circleRef: React.RefObject<HTMLDivElement>;
-    rotationAngle: number;
 }
 
 const CircleContainer = styled.div`
@@ -61,13 +60,22 @@ const Circle = styled.div`
   }
 `;
 
-const CircleTimeline: React.FC<CircleTimelineProps> = ({ periods,activePeriod, activePeriodId, onPeriodChange,circleRef,rotationAngle }) => {
+const CircleTimeline: React.FC<CircleTimelineProps> = ({
+                                                           periods,
+                                                           activePeriod,
+                                                           activePeriodId,
+                                                           onPeriodChange }) => {
+    const { circleRef, getCurrentRotation } = useTimelineRotation({
+        periods,
+        activePeriodId
+    });
     return (
         <CircleContainer>
             <Circle ref={circleRef}>
                 {periods.map((period, index) => {
                     const angle = (index * (360 / periods.length));
-                    const angleForSmall = -angle - rotationAngle
+                    const currentRotation = getCurrentRotation();
+                    const angleForSmall = -angle - currentRotation
                     return (
                         <TimelinePoint key={period.id}
                                        period={period}

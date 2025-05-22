@@ -6,6 +6,7 @@ import CircleTimeline from "./components/CircleTimeline/CircleTimeline";
 import EventsSlider from "./components/EventsSlider/EventsSlider";
 import NavigationControls from "./components/Controls/NavigationControls";
 import {TimelinePeriod} from "./types/types";
+import {useTimelineRotation} from "./hooks/useTimelineRotation";
 
 
 interface TimelineProps {
@@ -27,8 +28,6 @@ const TimelineContainer = styled.div`
 const Timeline: React.FC<TimelineProps> = ({ periods }) => {
     const [activePeriodId, setActivePeriodId] = useState(1);
     const [activePeriod, setActivePeriod] = useState<TimelinePeriod | null>(null);
-    const circleRef = useRef<HTMLDivElement | null>(null);
-    const [rotationAngle, setRotationAngle] = useState<number>(-60);
     const eventSwiperRef = useRef<SwiperClass | null>(null);
 
     const isMobile = useRef(window.innerWidth <= 768);
@@ -45,20 +44,6 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
     }, [activePeriodId, periods]);
 
     useEffect(() => {
-        // Рассчитаем начальный угол, чтобы активный период находился в положении "1 час"
-        const initialIndex = periods.findIndex(p => p.id === activePeriodId);
-        if (initialIndex !== -1 && circleRef.current) {
-            const totalPoints = periods.length;
-            const anglePerPoint = 360 / totalPoints;
-            const targetAngle = (initialIndex * anglePerPoint) -60;
-            gsap.set(circleRef.current, {
-                rotation: targetAngle,
-                transformOrigin: "center center"
-            });
-        }
-    }, []);
-
-    useEffect(() => {
         const handleResize = () => {
             isMobile.current = window.innerWidth <= 768;
         };
@@ -66,30 +51,18 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
-
+    const { rotateTo } = useTimelineRotation({
+        periods,
+        activePeriodId,
+        initialAngle: -60
+    });
     const handlePeriodChange = (periodId: number) => {
         if (periodId === activePeriodId) return;
-
-        const targetIndex = periods.findIndex(p => p.id === periodId);
-        // Расчет угла
-        const totalPoints = periods.length;
-        const anglePerPoint = 360 / totalPoints;
-        const targetAngle = -60 - (targetIndex * anglePerPoint);
-        // Анимация для поворота круга
-        if (circleRef.current) {
-            gsap.to(circleRef.current, {
-                rotation: targetAngle,
-                // duration: 0.5,
-                transformOrigin: "center center",
-                ease: "linear",
-                onComplete: () => {
-                    setRotationAngle(targetAngle);
-                    setActivePeriodId(periodId);
-                }
-            });
-        }
+        rotateTo(periodId, () => {
+            setActivePeriodId(periodId); // Обновляем состояние после анимации
+        });
     };
+
     const handlePrevPeriod = () => {
         const currentIndex = periods.findIndex(p => p.id === activePeriodId);
         if (currentIndex > 0) {
@@ -109,8 +82,6 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
                 periods={periods}
                 activePeriodId={activePeriodId}
                 onPeriodChange={handlePeriodChange}
-                circleRef={circleRef}
-                rotationAngle={rotationAngle}
                 activePeriod={activePeriod}/>
 
             <NavigationControls
