@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
-import { TimelinePeriod } from "../../Timeline";
+import {TimelinePeriod} from "../../types/types";
+
+interface TimelinePointProps {
+    period: TimelinePeriod;
+    isActive: boolean;
+    angleForBig: number;
+    angleForSmall: number;
+    onPeriodChange: (periodId: number) => void;
+}
 
 const TimelinePointBox = styled.div`
   position: absolute;
@@ -74,13 +82,6 @@ const PointNumber = styled.span<{ isActive: boolean }>`
   transition: all 0.3s ease;
 `;
 
-interface TimelinePointProps {
-    period: TimelinePeriod;
-    isActive: boolean;
-    angleForBig: number;
-    angleForSmall: number;
-    onPeriodChange: (periodId: number) => void;
-}
 
 const TimelinePoint: React.FC<TimelinePointProps> = ({ period, isActive, angleForBig, angleForSmall, onPeriodChange }) => {
     return (

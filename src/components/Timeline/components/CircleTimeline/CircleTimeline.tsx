@@ -2,7 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 import TimelinePoint from "./TimelinePoint";
 import YearsDisplay from "./YearsDisplay";
-import { TimelinePeriod } from '../../Timeline';
+import {TimelinePeriod} from "../../types/types";
+
+interface CircleTimelineProps {
+    periods: TimelinePeriod[];
+    activePeriod: TimelinePeriod | null;
+    activePeriodId: number;
+    onPeriodChange: (periodId: number) => void;
+    circleRef: React.RefObject<HTMLDivElement>;
+    rotationAngle: number;
+}
+
 const CircleContainer = styled.div`
   position: relative;
   width: 530px;
@@ -51,15 +61,6 @@ const Circle = styled.div`
   }
 `;
 
-interface CircleTimelineProps {
-    periods: TimelinePeriod[];
-    activePeriod: TimelinePeriod | null;
-    activePeriodId: number;
-    onPeriodChange: (periodId: number) => void;
-    circleRef: React.RefObject<HTMLDivElement>;
-    rotationAngle: number;
-}
-
 const CircleTimeline: React.FC<CircleTimelineProps> = ({ periods,activePeriod, activePeriodId, onPeriodChange,circleRef,rotationAngle }) => {
     return (
         <CircleContainer>
@@ -81,8 +82,6 @@ const CircleTimeline: React.FC<CircleTimelineProps> = ({ periods,activePeriod, a
             </Circle>
             <YearsDisplay
                 activePeriod={activePeriod}
-                // startYear={activePeriod.startYear}
-                // endYear={activePeriod.endYear}
             />
         </CircleContainer>
     );

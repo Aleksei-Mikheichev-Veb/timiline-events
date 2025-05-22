@@ -1,16 +1,24 @@
 import React from 'react';
 import styled from "styled-components";
-// import {Swiper, SwiperSlide} from "swiper/swiper-react";
 import { Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-// import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import {TimelinePeriod} from "../../Timeline";
 import SliderControls from "./SliderControls";
 import EventItem from "./EventItem";
+import MobileDots from "../UI/MobileDots";
+import {TimelinePeriod} from "../../types/types";
+
+interface EventsSliderProps {
+    activePeriod: TimelinePeriod;
+    setIsEnd: (isEnd: boolean) => void;
+    setIsBeginning: (isBeginning: boolean) => void;
+    isBeginning: boolean;
+    isEnd: boolean;
+    eventSwiperRef: React.MutableRefObject<SwiperType | null>;
+}
 
 const EventsContainer = styled.div`
   margin-top: 70px;
@@ -28,44 +36,6 @@ const SwiperContainer = styled.div`
     padding: 0;
   }
 `
-
-const MobileDots = styled.div`
-  display: none;
-  
-  @media (max-width: 768px) {
-    display: block;
-    //margin-top: 20px;
-    text-align: center;
-  }
-  
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: #42567A;
-    opacity: 0.4;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-  }
-  @media (max-width: 430px) {
-    .swiper-pagination-bullet {
-      width: 6px;
-      height: 6px;
-    }
-  }
-`;
-
-interface EventsSliderProps {
-    activePeriod: TimelinePeriod;
-    setIsEnd: (isEnd: boolean) => void;
-    setIsBeginning: (isBeginning: boolean) => void;
-    isBeginning: boolean;
-    isEnd: boolean;
-    eventSwiperRef: React.MutableRefObject<SwiperType | null>;
-}
 
 const EventsSlider: React.FC<EventsSliderProps> = ({activePeriod, isEnd, setIsEnd, isBeginning,setIsBeginning,eventSwiperRef}) => {
     return (
@@ -110,7 +80,7 @@ const EventsSlider: React.FC<EventsSliderProps> = ({activePeriod, isEnd, setIsEn
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <MobileDots className="swiper-pagination"></MobileDots>
+                <MobileDots/>
             </SwiperContainer>
         </EventsContainer>
     );

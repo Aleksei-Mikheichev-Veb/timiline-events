@@ -253,7 +253,6 @@ const Title = styled.h1`
     }
   }
   @media (max-width: 768px) {
-    //font-size: 20px;
     top: 50px;
     left: 28px;
     &:before {

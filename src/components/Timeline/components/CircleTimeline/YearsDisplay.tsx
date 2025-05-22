@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import { TimelinePeriod } from '../../Timeline';
+import {TimelinePeriod} from "../../types/types";
+
+interface YearsDisplayProps {
+    activePeriod:TimelinePeriod | null;
+}
 
 const YearsContainer = styled.div`
   position: absolute;
@@ -55,11 +59,6 @@ const StartYear = styled(BaseYear)`
 const EndYear = styled(BaseYear)`
   color: #EF5DA8;
 `;
-
-
-interface YearsDisplayProps {
-    activePeriod:TimelinePeriod | null;
-}
 
 const YearsDisplay: React.FC<YearsDisplayProps> = ({activePeriod}) => {
     return (

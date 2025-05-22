@@ -5,7 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/TimelineCircle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/YearsDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/YearsDisplay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/EventItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/EventItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/EventsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/EventsSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +50,7 @@
       <updated>1747394549990</updated>
       <workItem from="1747394552086" duration="6465000" />
       <workItem from="1747554548500" duration="24438000" />
-      <workItem from="1747729570645" duration="56562000" />
+      <workItem from="1747729570645" duration="62157000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import {TimelineEvent} from "../../Timeline";
+import {TimelineEvent} from "../../types/types";
+
+interface EventItemProps {
+    event: TimelineEvent;
+}
 
 const EventItemContainer = styled.div`
   display: flex;
@@ -18,6 +22,7 @@ const EventItemContainer = styled.div`
     max-width: 170px;
   }
 `;
+
 const EventDate = styled.div`
   font-size: 25px;
   font-weight: 400;
@@ -33,10 +38,6 @@ const EventDescription = styled.p`
   line-height: 1.5;
   color: #42567A;
 `;
-
-interface EventItemProps {
-    event: TimelineEvent;
-}
 const EventItem: React.FC<EventItemProps> = ({ event }) => {
     return (
         <EventItemContainer>
