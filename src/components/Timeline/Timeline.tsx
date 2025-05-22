@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Swiper as SwiperClass } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Pagination, Navigation } from 'swiper/modules';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
 import { gsap } from 'gsap';
+import CircleTimeline from "./components/CircleTimeline/CircleTimeline";
+import EventsSlider from "./components/EventsSlider/EventsSlider";
+import ButtonsContainer from "./components/UI/ButtonsContainer";
 
 // Types
-interface TimelinePeriod {
+export interface TimelinePeriod {
     id: number;
     startYear: number;
     endYear: number;
@@ -17,7 +20,7 @@ interface TimelinePeriod {
     events: TimelineEvent[];
 }
 
-interface TimelineEvent {
+export interface TimelineEvent {
     id: number;
     date: string;
     description: string;
@@ -36,179 +39,6 @@ const TimelineContainer = styled.div`
   @media (max-width: 768px) {
     padding: 0px;
   }
-`;
-
-const CircleContainer = styled.div`
-  position: relative;
-  width: 530px;
-  height: 530px;
-  margin: 0 auto;
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1440px;
-    height: 1px;
-    background: rgba(66, 86, 122, 0.20);
-  }
-  @media (max-width: 1200px) {
-    width: 450px;
-    height: 450px;
-  }
-  @media (max-width: 900px) {
-    width: 400px;
-    height: 400px;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-    &:after {
-      display: none;
-    }
-  }
-`;
-
-const Circle = styled.div`
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(66, 86, 122, 0.20);
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index:5;
-  transform-origin: 0 0;
-  transition: transform 0.5s ease;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const TimelinePointBox = styled.div`
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-
-  @media (max-width: 900px) {
-    width: 46px;
-    height: 46px;
-  }
-`
-const TimelinePoint = styled.div<{ angleForBig: number; angleForSmall: number; isActive: boolean }>`
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  transform-origin: center;
-  transform: ${props => `rotate(${props.angleForBig}deg) translate(265px) rotate(${ props.angleForSmall}deg)`};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  &:hover .point-number {
-    opacity: 1;
-    transform: scale(1);
-    background-color: #F4F5F9;
-  }
-  &:hover .point{
-    background-color: #F4F5F9;
-    width: 56px;
-    height: 56px;
-  }
-  @media (max-width: 1200px) {
-    transform: ${props => `rotate(${props.angleForBig}deg) translate(225px) rotate(${ props.angleForSmall}deg)`};
-  }
-  @media (max-width: 900px) {
-    transform: ${props => `rotate(${props.angleForBig}deg) translate(200px) rotate(${ props.angleForSmall}deg)`};
-    width: 46px;
-    height: 46px;
-  }
-`;
-
-const Point = styled.div<{ isActive: boolean }>`
-  width: ${props => props.isActive ? '56px' : '6px'};
-  height: ${props => props.isActive ? '56px' : '6px'};
-  border-radius: 50%;
-  border: 1px solid rgba(48, 62, 88, 0.5);
-  background-color: ${props => props.isActive ? '#F4F5F9' : '#42567A'};
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  position: relative;
-
-  @media (max-width: 900px) {
-    width: ${props => props.isActive ? '46px' : '6px'};
-    height: ${props => props.isActive ? '46px' : '6px'};
-  }
-`;
-
-const PointNumber = styled.span<{ isActive: boolean }>`
-  color: #42567A;
-  font-size: 20px;
-  font-weight: 400;
-  opacity: ${props => props.isActive ? 1 : 0};
-  transform: ${props => props.isActive ? 'scale(1)' : 'scale(0)'};
-  transition: all 0.3s ease;
-`;
-
-const YearsContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 47%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap:180px;
-  
-  @media (max-width: 1200px) {
-    gap:150px;
-  }
-  @media (max-width: 768px) {
-    position: static;
-    justify-content: center;
-    gap:50px;
-    transform: none;
-    padding: 156px 0 56px;
-    border-bottom:1px solid #C7CDD9;
-  }
-  @media (max-width: 560px) {
-    padding: 86px 0 56px;
-  }
-  @media (max-width: 450px) {
-    gap:20px;
-  }
-`;
-
-const BaseYear = styled.div`
-  font-size: 170px;
-  font-weight: 700;
-  
-  @media (max-width: 1200px) {
-    font-size: 120px;
-  }@media (max-width: 900px) {
-    font-size: 100px;
-  }
-  @media (max-width: 560px) {
-    font-size: 56px;
-  }
-`;
-
-const StartYear = styled(BaseYear)`
-  color: #5D5FEF;
-  position: relative;
-`;
-
-const EndYear = styled(BaseYear)`
-  color: #EF5DA8;
 `;
 
 
@@ -232,11 +62,11 @@ const Counter = styled.div`
   margin-bottom: 20px;
 `;
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-`;
+// const ButtonsContainer = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 20px;
+// `;
 
 const Button = styled.button<{ disabled?: boolean }>`
   width: 50px;
@@ -258,23 +88,23 @@ const Button = styled.button<{ disabled?: boolean }>`
     height: 25px;
   }
 `;
-const ButtonSwiper = styled.button<{ isVisible?: boolean }>`
-  width: 40px;
-  height: 40px;
-  background-color: #FFF;
-  border-radius: 50%;
-  border: 1px solid #FFF;
-  cursor:  pointer;
-  opacity: ${props => props.isVisible ? 1 : 0};
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  
-  &:hover {
-    background-color: ${props => props.disabled ? '#F4F5F9' : '#fff'};
-  }
-`;
-
+// const ButtonSwiper = styled.button<{ isVisible?: boolean }>`
+//   width: 40px;
+//   height: 40px;
+//   background-color: #FFF;
+//   border-radius: 50%;
+//   border: 1px solid #FFF;
+//   cursor:  pointer;
+//   opacity: ${props => props.isVisible ? 1 : 0};
+//   display:  flex;
+//   align-items: center;
+//   justify-content: center;
+//
+//   &:hover {
+//     background-color: ${props => props.disabled ? '#F4F5F9' : '#fff'};
+//   }
+// `;
+//
 type ArrowIconProps = {
     direction: "left" | "right";
 };
@@ -296,57 +126,56 @@ const StyledArrow = styled.svg`
   height: 7px;
 `;
 
-const EventsContainer = styled.div`
-  margin-top: 70px;
-  position: relative;
-  z-index: 2;
-  @media (max-width: 560px) {
-    font-size: 56px;
-    margin-top: 20px;
-  }
-`;
+// const EventsContainer = styled.div`
+//   margin-top: 70px;
+//   position: relative;
+//   z-index: 2;
+//   @media (max-width: 560px) {
+//     font-size: 56px;
+//     margin-top: 20px;
+//   }
+// `;
 
-const EventSliderControls = styled.div`
-  width: 100%;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
+// const EventSliderControls = styled.div`
+//   width: 100%;
+//   position: absolute;
+//   right: 0;
+//   top: 50%;
+//   transform: translate(0, -50%);
+//   @media (max-width: 768px) {
+//     display: none;
+//   }
+// `;
 
 
-
-const MobileDots = styled.div`
-  display: none;
-  
-  @media (max-width: 768px) {
-    display: block;
-    //margin-top: 20px;
-    text-align: center;
-  }
-  
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    background-color: #42567A;
-    opacity: 0.4;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-  }
-  @media (max-width: 430px) {
-    .swiper-pagination-bullet {
-      width: 6px;
-      height: 6px;
-    }
-  }
-`;
+// const MobileDots = styled.div`
+//   display: none;
+//
+//   @media (max-width: 768px) {
+//     display: block;
+//     //margin-top: 20px;
+//     text-align: center;
+//   }
+//
+//   .swiper-pagination-bullet {
+//     width: 10px;
+//     height: 10px;
+//     background-color: #42567A;
+//     opacity: 0.4;
+//     margin: 0 5px;
+//     cursor: pointer;
+//   }
+//
+//   .swiper-pagination-bullet-active {
+//     opacity: 1;
+//   }
+//   @media (max-width: 430px) {
+//     .swiper-pagination-bullet {
+//       width: 6px;
+//       height: 6px;
+//     }
+//   }
+// `;
 
 const Timeline: React.FC<TimelineProps> = ({ periods }) => {
     const [activePeriodId, setActivePeriodId] = useState(1);
@@ -437,43 +266,13 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
 
     return (
         <TimelineContainer>
-            <CircleContainer>
-                <Circle ref={circleRef}>
-                    {periods.map((period, index) => {
-                        const angle = (index * (360 / periods.length));
-                        const angleForSmall = -angle - rotationAngle
-                        return (
-                            <TimelinePointBox key={period.id}>
-                                <TimelinePoint
-                                    angleForBig={angle}
-                                    angleForSmall={angleForSmall}
-                                    isActive={period.id === activePeriodId}
-                                    onClick={() => handlePeriodChange(period.id)}
-                                >
-                                    <Point isActive={period.id === activePeriodId}>
-                                        <PointNumber
-                                            isActive={period.id === activePeriodId}
-                                        >
-                                            {period.id}
-                                        </PointNumber>
-                                    </Point>
-                                </TimelinePoint>
-                            </TimelinePointBox>
-
-                        );
-                    })}
-                </Circle>
-
-                <YearsContainer>
-                    {activePeriod && (
-                        <>
-                            <StartYear>{activePeriod.startYear}</StartYear>
-                            <EndYear>{activePeriod.endYear}</EndYear>
-                        </>
-                    )}
-                </YearsContainer>
-            </CircleContainer>
-
+            <CircleTimeline
+                periods={periods}
+                activePeriodId={activePeriodId}
+                onPeriodChange={handlePeriodChange}
+                circleRef={circleRef}
+                rotationAngle={rotationAngle}
+                activePeriod={activePeriod}/>
 
             <ControlsContainer>
                 <Counter>
@@ -496,126 +295,85 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
             </ControlsContainer>
 
             {activePeriod && (
-                <EventsContainer>
-                        <EventSliderControls>
-                            <ButtonsContainer>
-                                <ButtonSwiper
-                                    onClick={() => eventSwiperRef.current?.slidePrev()}
-                                    isVisible={!isBeginning}
-                                >
-                                    <ArrowIcon direction="left" />
-                                </ButtonSwiper>
-                                <ButtonSwiper
-                                    onClick={() => eventSwiperRef.current?.slideNext()}
-                                    isVisible={!isEnd}
-                                >
-                                    <ArrowIcon direction="right" />
-                                </ButtonSwiper>
-                            </ButtonsContainer>
-                        </EventSliderControls>
-
-                        <SwiperContainer>
-                            <Swiper
-
-                                modules={[Pagination, Navigation]}
-                                pagination={{
-                                    el: '.swiper-pagination',
-                                    clickable: true
-                                }}
-                                breakpoints={{
-                                    320: {
-                                        slidesPerView: 1.7,
-                                        spaceBetween: 20
-                                    },
-                                    600: {
-                                        slidesPerView: 2.4,
-                                        spaceBetween: 40
-                                    },
-                                    1024: {
-                                        slidesPerView: 3.4,
-                                        spaceBetween: 80
-                                    }
-                                }}
-                                onSwiper={(swiper) => {
-                                    eventSwiperRef.current = swiper;
-                                    // Инициализируем состояния при монтировании
-                                    setIsBeginning(swiper.isBeginning);
-                                    setIsEnd(swiper.isEnd);
-                                }}
-                                onSlideChange={(swiper) => {
-                                    // Обновляем состояния при изменении слайда
-                                    setIsBeginning(swiper.isBeginning);
-                                    setIsEnd(swiper.isEnd);
-                                }}
-                            >
-                                {activePeriod.events.map(event => (
-                                    <SwiperSlide key={event.id}>
-                                        <EventItem event={event} />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                            <MobileDots className="swiper-pagination"></MobileDots>
-                        </SwiperContainer>
-                </EventsContainer>
+                <EventsSlider
+                    activePeriod={activePeriod}
+                    setIsEnd={setIsEnd}
+                    setIsBeginning={setIsBeginning}
+                    eventSwiperRef={eventSwiperRef}
+                    isBeginning={isBeginning}
+                    isEnd={isEnd}/>
+                // <EventsContainer>
+                //         <EventSliderControls>
+                //             <ButtonsContainer>
+                //                 <ButtonSwiper
+                //                     onClick={() => eventSwiperRef.current?.slidePrev()}
+                //                     isVisible={!isBeginning}
+                //                 >
+                //                     <ArrowIcon direction="left" />
+                //                 </ButtonSwiper>
+                //                 <ButtonSwiper
+                //                     onClick={() => eventSwiperRef.current?.slideNext()}
+                //                     isVisible={!isEnd}
+                //                 >
+                //                     <ArrowIcon direction="right" />
+                //                 </ButtonSwiper>
+                //             </ButtonsContainer>
+                //         </EventSliderControls>
+                //
+                //         <SwiperContainer>
+                //             <Swiper
+                //
+                //                 modules={[Pagination, Navigation]}
+                //                 pagination={{
+                //                     el: '.swiper-pagination',
+                //                     clickable: true
+                //                 }}
+                //                 breakpoints={{
+                //                     320: {
+                //                         slidesPerView: 1.7,
+                //                         spaceBetween: 20
+                //                     },
+                //                     600: {
+                //                         slidesPerView: 2.4,
+                //                         spaceBetween: 40
+                //                     },
+                //                     1024: {
+                //                         slidesPerView: 3.4,
+                //                         spaceBetween: 80
+                //                     }
+                //                 }}
+                //                 onSwiper={(swiper) => {
+                //                     eventSwiperRef.current = swiper;
+                //                     // Инициализируем состояния при монтировании
+                //                     setIsBeginning(swiper.isBeginning);
+                //                     setIsEnd(swiper.isEnd);
+                //                 }}
+                //                 onSlideChange={(swiper) => {
+                //                     // Обновляем состояния при изменении слайда
+                //                     setIsBeginning(swiper.isBeginning);
+                //                     setIsEnd(swiper.isEnd);
+                //                 }}
+                //             >
+                //                 {activePeriod.events.map(event => (
+                //                     <SwiperSlide key={event.id}>
+                //                         <EventItem event={event} />
+                //                     </SwiperSlide>
+                //                 ))}
+                //             </Swiper>
+                //             <MobileDots className="swiper-pagination"></MobileDots>
+                //         </SwiperContainer>
+                // </EventsContainer>
             )}
         </TimelineContainer>
     );
 };
 
 
-const SwiperContainer = styled.div`
-  padding: 0 60px;
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-`
-
-
-const EventItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 280px;
-  gap: 15px;
-
-  @media (max-width: 1200px) {
-    width: 220px;
-  }
-  @media (max-width: 768px) {
-    margin-bottom: 100px;
-  }
-  @media (max-width: 450px) {
-    max-width: 170px;
-    //margin-bottom: 30px;
-  }
-`;
-
-const EventDate = styled.div`
-  font-size: 25px;
-  font-weight: 400;
-  color: #3877EE;
-  
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
-
-const EventDescription = styled.p`
-  font-size: 14px;
-  line-height: 1.5;
-  color: #42567A;
-`;
-
-interface EventItemProps {
-    event: TimelineEvent;
-}
-
-const EventItem: React.FC<EventItemProps> = ({ event }) => {
-    return (
-        <EventItemContainer>
-            <EventDate>{event.date}</EventDate>
-            <EventDescription>{event.description}</EventDescription>
-        </EventItemContainer>
-    );
-};
+// const SwiperContainer = styled.div`
+//   padding: 0 60px;
+//   @media (max-width: 768px) {
+//     padding: 0;
+//   }
+// `
 
 export default Timeline;

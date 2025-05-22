@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Timeline from './components/Timeline/Timeline';
+import Timeline from './components/Timeline';
 import GlobalStyle from './GlobalStyle';
 
 // Периоды с событиями
