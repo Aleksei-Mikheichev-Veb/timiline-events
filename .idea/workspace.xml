@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="36021314-9f6e-4bc5-9d5e-0c5a89d7dde8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobalStyle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/Controls/NavigationControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/Controls/NavigationControls.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/hooks/useTimelineRotation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/hooks/useTimelineRotation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Timeline/utils/calculations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/utils/calculations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +50,7 @@
       <updated>1747394549990</updated>
       <workItem from="1747394552086" duration="6465000" />
       <workItem from="1747554548500" duration="24438000" />
-      <workItem from="1747729570645" duration="85155000" />
+      <workItem from="1747729570645" duration="91327000" />
     </task>
     <servers />
   </component>
