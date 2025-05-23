@@ -69,6 +69,7 @@ const CircleTimeline: React.FC<CircleTimelineProps> = ({
         periods,
         activePeriodId
     });
+    console.log('circle')
     return (
         <CircleContainer>
             <Circle ref={circleRef}>
@@ -80,7 +81,6 @@ const CircleTimeline: React.FC<CircleTimelineProps> = ({
                         <TimelinePoint key={period.id}
                                        period={period}
                                        isActive={period.id === activePeriodId}
-                                       // angle={calculateAngle(index)}
                                        angleForBig={angle}
                                        angleForSmall={angleForSmall}
                                        onPeriodChange={onPeriodChange}/>

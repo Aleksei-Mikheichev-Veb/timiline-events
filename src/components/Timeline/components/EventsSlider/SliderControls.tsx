@@ -4,6 +4,13 @@ import { Swiper as SwiperType } from 'swiper';
 import ButtonsContainer from "../UI/ButtonsContainer";
 import ArrowIcon from "../UI/ArrowIcon";
 
+interface SliderControlsProps {
+    isBeginning: boolean;
+    isEnd: boolean;
+    eventSwiperRef: React.MutableRefObject<SwiperType | null>;
+}
+
+
 const EventSliderControls = styled.div`
   width: 100%;
   position: absolute;
@@ -15,8 +22,7 @@ const EventSliderControls = styled.div`
   }
 `;
 
-
-const ButtonSwiper = styled.button<{ isVisible?: boolean }>`
+const ButtonSwiper = styled.button<{ $isVisible?: boolean }>`
   border-radius: 50%;
   display:  flex;
   align-items: center;
@@ -26,19 +32,8 @@ const ButtonSwiper = styled.button<{ isVisible?: boolean }>`
   background-color: #FFF;
   border: 1px solid #FFF;
   cursor:  pointer;
-  opacity: ${props => props.isVisible ? 1 : 0};
-  
-  
-  &:hover {
-    background-color: ${props => props.disabled ? '#F4F5F9' : '#fff'};
-  }
+  opacity: ${props => props.$isVisible ? 1 : 0};
 `;
-
-interface SliderControlsProps {
-    isBeginning: boolean;
-    isEnd: boolean;
-    eventSwiperRef: React.MutableRefObject<SwiperType | null>;
-}
 
 const SliderControls: React.FC<SliderControlsProps> = ({isBeginning, isEnd, eventSwiperRef}) => {
     return (
@@ -46,13 +41,13 @@ const SliderControls: React.FC<SliderControlsProps> = ({isBeginning, isEnd, even
             <ButtonsContainer>
                 <ButtonSwiper
                     onClick={() => eventSwiperRef.current?.slidePrev()}
-                    isVisible={!isBeginning}
+                    $isVisible={!isBeginning}
                 >
                     <ArrowIcon direction="left" />
                 </ButtonSwiper>
                 <ButtonSwiper
                     onClick={() => eventSwiperRef.current?.slideNext()}
-                    isVisible={!isEnd}
+                    $isVisible={!isEnd}
                 >
                     <ArrowIcon direction="right" />
                 </ButtonSwiper>

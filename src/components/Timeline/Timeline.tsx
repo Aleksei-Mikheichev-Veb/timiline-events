@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Swiper as SwiperClass } from 'swiper';
-import { gsap } from 'gsap';
 import CircleTimeline from "./components/CircleTimeline/CircleTimeline";
 import EventsSlider from "./components/EventsSlider/EventsSlider";
 import NavigationControls from "./components/Controls/NavigationControls";
 import {TimelinePeriod} from "./types/types";
 import {useTimelineRotation} from "./hooks/useTimelineRotation";
+import Title from "./components/Title";
+import GlobalStyle from "../GlobalStyle";
 
 
 interface TimelineProps {
@@ -18,12 +19,27 @@ interface TimelineProps {
 const TimelineContainer = styled.div`
   padding: 20px;
   position: relative;
-
+  border: 1px solid rgba(66, 86, 122, 0.20);
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 100%;
+    background: rgba(66, 86, 122, 0.20);
+  }
+  
   @media (max-width: 768px) {
+    border: none;
     padding: 0px;
+    &:before {
+      display: none;
+    }
   }
 `;
-
 
 const Timeline: React.FC<TimelineProps> = ({ periods }) => {
     const [activePeriodId, setActivePeriodId] = useState(1);
@@ -62,22 +78,11 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
             setActivePeriodId(periodId); // Обновляем состояние после анимации
         });
     };
-
-    const handlePrevPeriod = () => {
-        const currentIndex = periods.findIndex(p => p.id === activePeriodId);
-        if (currentIndex > 0) {
-            handlePeriodChange(periods[currentIndex - 1].id);
-        }
-    };
-    const handleNextPeriod = () => {
-        const currentIndex = periods.findIndex(p => p.id === activePeriodId);
-        if (currentIndex < periods.length - 1) {
-            handlePeriodChange(periods[currentIndex + 1].id);
-        }
-    };
-
+    console.log('timeline')
     return (
         <TimelineContainer>
+            <GlobalStyle />
+            <Title/>
             <CircleTimeline
                 periods={periods}
                 activePeriodId={activePeriodId}
@@ -85,8 +90,8 @@ const Timeline: React.FC<TimelineProps> = ({ periods }) => {
                 activePeriod={activePeriod}/>
 
             <NavigationControls
-                handlePrevPeriod={handlePrevPeriod}
-                handleNextPeriod={handleNextPeriod}
+                periods={periods}
+                onPeriodChange={handlePeriodChange}
                 activePeriodId={activePeriodId}
                 NumberOfPeriods={periods.length}/>
 

@@ -49,12 +49,9 @@ export const useTimelineRotation = ({
     // Анимированный поворот к новому периоду
     const rotateTo = useCallback((periodId: number, onComplete?: () => void) => {
         const targetIndex = periods.findIndex(p => p.id === periodId);
-        console.log('in')
-        console.log(!circleRef.current)
         if (targetIndex === -1 || circleRef.current) return;
-        console.log('in2')
+
         const targetAngle = calculateRotationAngle(targetIndex, periods.length, initialAngle);
-        console.log(targetAngle)
         gsap.to(circleRef.current, {
             rotation: targetAngle,
             duration: 0,

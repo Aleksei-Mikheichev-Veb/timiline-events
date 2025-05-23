@@ -1,14 +1,4 @@
-// Рассчитывает угол для отдельной точки на круге
-
-export const calculatePointAngle = (index: number, totalPoints: number): number => {
-    return index * (360 / totalPoints);
-};
-
-
-
  // Рассчитывает угол поворота для активного периода
-
-
 
 export const calculateRotationAngle = (
     targetIndex: number,// индекс целевого периода

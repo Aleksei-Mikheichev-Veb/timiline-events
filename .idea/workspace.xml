@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="36021314-9f6e-4bc5-9d5e-0c5a89d7dde8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobalStyle.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/Timeline.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/CircleTimeline.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/CircleTimeline/TimelinePoint.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/Controls/NavigationControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/Controls/NavigationControls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/components/EventsSlider/SliderControls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Timeline/hooks/useTimelineRotation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/hooks/useTimelineRotation.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timeline/utils/calculations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timeline/utils/calculations.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +41,11 @@
     <property name="ts.external.directory.path" value="D:\React\only-test\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\React\only-test\src\components" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -45,7 +56,7 @@
       <updated>1747394549990</updated>
       <workItem from="1747394552086" duration="6465000" />
       <workItem from="1747554548500" duration="24438000" />
-      <workItem from="1747729570645" duration="74127000" />
+      <workItem from="1747729570645" duration="85155000" />
     </task>
     <servers />
   </component>
